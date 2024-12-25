@@ -1,0 +1,72 @@
+ion-content {
+  --background: white;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+
+  ion-item {
+    --padding-start: 10px;
+    --padding-end: 10px;
+    margin-bottom: 20px;
+  }
+
+  ion-button {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  ion-button {
+    height: 50px;
+    --background: #5b0f7c;
+    --color: white;
+    --border-radius: 4px;
+    --padding: 10px 20px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .container {
+    background-color: #fff;
+  }
+}
+
+.container {
+  margin: 1%;
+}
+
+.saveBtn {
+  width: 50%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+ion-toolbar {
+  display: flex;
+  justify-content: center;
+  --background: #5b0f7c;
+  height: 10rem;
+}
+
+ion-title {
+  text-align: center;
+  --color: white;
+}
+
+.image img {
+  width: 50rem;
+}
+
+.image {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8rem;
+}
+
+ion-title {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1.4rem;
+}

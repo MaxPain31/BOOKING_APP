@@ -1,0 +1,119 @@
+ion-content {
+    --background: rgb(255, 255, 255);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  ion-title {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+  
+  ion-toolbar {
+    display: flex;
+    justify-content: center;
+    --background: #5b0f7c;  
+    height: 5rem; 
+  }
+
+.button {
+    --background: #5b0f7c; 
+    --color: white; 
+    --border-radius: 4px; 
+    --padding: 10px 20px; 
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  }
+
+  .btn {
+    background: transparent;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-top: 50px;
+  }
+  
+  th, td {
+    border: 1px solid #2c2a2a;
+    padding: 8px;
+    color:#2c2a2a;
+  }
+  
+  tr:hover {
+    background-color: #e468fc;
+  }
+
+  .book-container {
+      max-width: 400px; 
+      margin: auto; 
+      padding: 20px;
+    }
+    
+    .book-container h1 {
+      text-align: center;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      
+      .info {
+        flex: 1;
+      }
+
+      
+      .name {
+        color: #2c2a2a;
+        font-weight: bold;
+        margin: 0;
+        font-size: 20px;
+      }
+      
+      .contact-number {
+        color: #c6c5c5; /* dirty white color */
+        margin: 0;
+        font-size: 18px;
+      }
+      
+      .icon {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+      }
+      
+      .icon ion-icon {
+        font-size: 24px;
+        cursor: pointer;
+      }
+      
+      .add-button {
+        width: 100%;
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .btn {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+      }
+      
+      .btn:hover, .btn:focus {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+      }
+      
+      .btn ion-icon {
+        color: black; /* Ensures the icon color inherits from the parent */
+        font-size: 24px; /* Adjust size if necessary */
+      }
+      
+      

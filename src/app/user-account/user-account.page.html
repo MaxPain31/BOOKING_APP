@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>User Account</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="#fff" (click)="signOut()">Logout</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="profile">
+    <div class="img">
+      <img src="../assets/images/user.png">
+      <div class="info">
+        <p>{{email}}</p>
+        <h3><i>{{phNo}}</i></h3>
+        <ion-button (click)="navigateToEdit()">Edit Profile</ion-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="my-account">
+      <h4 (click)="navigateToPaymentMatrix()">Payment Methods</h4>
+    </div>
+    <div class="btn">
+      <ion-icon name="chevron-forward-outline" (click)="navigateToPaymentMatrix()" slot="end"></ion-icon>
+    </div>
+  </div>
+  <div class="container">
+    <div class="my-account">
+      <h4 (click)="navigateToSavedPlaces()">Saved Places </h4>
+    </div>
+    <div class="btn">
+      <ion-icon name="chevron-forward-outline" (click)="navigateToSavedPlaces()" slot="end"></ion-icon>
+    </div>
+  </div>
+  <div class="container">
+    <div class="my-account">
+      <h4 (click)="navigateToEmergencyMethod()">Emergency Contacts</h4>
+    </div>
+    <div class="btn">
+      <ion-icon name="chevron-forward-outline" (click)="navigateToEmergencyMethod()" slot="end"></ion-icon>
+    </div>
+  </div>
+</ion-content>

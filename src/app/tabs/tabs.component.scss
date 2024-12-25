@@ -1,0 +1,14 @@
+ion-tab-bar {
+    --background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adding shadow */
+  }
+  
+  /* Target each tab button icon */
+  ion-tab-bar ion-tab-button ion-icon {
+    color: #5b027e; /* Changing icon color to violet */
+  }
+  
+  /* If you want the text labels to be violet too, add this */
+  ion-tab-bar ion-tab-button ion-label {
+    color: #5b027e;
+  }

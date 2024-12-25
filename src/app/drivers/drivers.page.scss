@@ -1,0 +1,71 @@
+ion-content {
+    --background: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+ion-title {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+
+ion-toolbar {
+    display: flex;
+    justify-content: center;
+    --background: #5b0f7c;  
+    height: 5rem; 
+}
+
+ion-button {
+    --background: #5b0f7c; 
+    --color: white; 
+    --border-radius: 4px; 
+    --padding: 10px 20px; 
+}
+
+.list {
+    margin-top: 5rem;
+    --padding-start: 10px;
+    --padding-end: 10px;
+  }
+
+  ion-item {
+    --background: white;
+    --padding-start: 10px;
+    --padding-end: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 10px; 
+  }
+
+  ion-input {
+    --background: white;
+    --padding-start: 10px; 
+    color: black;
+  }
+
+  ion-input::part(native) {
+    --background: white;
+    color: black;
+    border-radius: 4px;
+    padding: 10px; 
+    border: 1px solid #ccc; 
+  }
+
+  h2 {
+    color:black;
+  }
+
+  .cover-image img {
+    width: 40rem;
+  }
+
+  .user-image img {
+    width: 6rem;
+  }
+
+  .user-image {
+    position: absolute;
+    top: 18rem;
+    left: 9.5rem;
+  }

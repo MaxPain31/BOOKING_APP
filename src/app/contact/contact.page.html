@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/emergency"></ion-back-button>
+    </ion-buttons>
+    <ion-title>ADD CONTACT</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-content >
+    <div class = "book-container">
+      <h1>ADDRESS</h1>
+      <ion-item>
+        <ion-input type="text" placeholder="Name of contact person" [(ngModel)]="contacts.name"><ion-icon name="person" slot="start"></ion-icon></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="Mobile Number" [(ngModel)]="contacts.contactNum"><ion-icon name="phone-portrait" slot="start"></ion-icon></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="addContact()">Save</ion-button>
+    </div>
+  </ion-content>
+</ion-content>

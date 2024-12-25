@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/user-account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Saved Places</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="container">
+    <h4>Saved Addresses</h4>
+    <div *ngFor="let address of savedAddresses">
+      <h3>{{ address.title }}</h3>
+      <p>{{ address.place }}</p>
+    </div>
+  </div>
+  
+</ion-content>

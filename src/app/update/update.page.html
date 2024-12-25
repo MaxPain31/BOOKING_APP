@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/address"></ion-back-button>
+    </ion-buttons>
+    <ion-title>UPDATE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class = "book-container">
+    <h1>ADDRESS</h1>
+    <ion-item>
+      <ion-input type="text" placeholder="Title" [(ngModel)]="addresses.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Address" [(ngModel)]="addresses.place"></ion-input>
+    </ion-item>
+  </div>
+    <ion-button expand="block" (click)="updateAddress()">Update</ion-button>
+</ion-content>
+

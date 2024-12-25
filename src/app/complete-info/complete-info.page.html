@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Complete Ride Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>User Info</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Name:</ion-label>
+        <ion-label>{{ username }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Number:</ion-label>
+        <ion-label>{{ usernumber }}</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Driver Info</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Name:</ion-label>
+        <ion-label>{{ drivername }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Number:</ion-label>
+        <ion-label>{{ drivernumber }}</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ride Info</ion-card-title>
+    </ion-card-header>
+    <ion-item>
+      <ion-label>Time and Date:</ion-label>
+      <ion-label>{{ selectedDateTime }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Pick-up Location:</ion-label>
+      <ion-label>{{ pickUpLocation?.address }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Drop-off Location:</ion-label>
+      <ion-label>{{ dropOffLocation?.address }}</ion-label>
+    </ion-item>    
+  </ion-card>
+
+  <ion-button expand="full" (click)="confirmBooking()">BOOK</ion-button>
+</ion-content>

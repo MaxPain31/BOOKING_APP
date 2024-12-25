@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Driver Info</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-list>
+    <ion-item *ngFor="let driver of drivers">
+      <ion-label>
+        <h2>{{ driver.username }}</h2>
+        <p>Email: {{ driver.email }}</p>
+        <p>Phone: {{ driver.phNo }}</p>
+        <p>Car Type: {{ driver.carType }}</p>
+        <p>Available: {{ driver.available}}</p>
+        <ion-button color="success" (click)="approveDriver(driver.id)" [disabled]="driver.approved">Approve</ion-button>
+        <ion-button color="warning" (click)="disapproveDriver(driver.id)" [disabled]="!driver.approved">Disapprove</ion-button>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  
+</ion-content>

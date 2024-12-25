@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="signOut()">Logout</ion-button>
+    </ion-buttons>
+    <ion-title>Admin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-button expand='block' (click)="manageAddress()">MANAGE ADDRESS</ion-button>
+
+
+    <ion-button expand='block' (click)="seeDrivers()">DRIVERS</ion-button>
+
+
+
+    <ion-button expand='block' (click)="seeUsers()">USERS</ion-button>
+
+  
+</ion-content>

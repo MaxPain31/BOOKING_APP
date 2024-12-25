@@ -1,0 +1,46 @@
+ion-content {
+  --background: white;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+ion-title {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+ion-toolbar {
+  display: flex;
+  justify-content: center;
+  --background: #5b0f7c;  
+  height: 5rem; 
+}
+
+ion-button {
+  --background: #5b0f7c; 
+  --color: white; 
+  --border-radius: 4px; 
+  --padding: 10px 20px; 
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.book-container {
+    max-width: 400px; 
+    margin: auto; 
+    padding: 20px;
+  }
+  
+  .book-container h1 {
+    text-align: center;
+  }
+  
+  ion-item {
+    margin-bottom: 15px; 
+  }
+
+  ion-button {
+    display: block; 
+    margin: auto;
+    width: 150px; 
+    margin-top: 20px; 
+  }

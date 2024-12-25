@@ -1,0 +1,95 @@
+ion-content {
+  --background: linear-gradient(to bottom, white, #5b0f7c);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+  ion-item {
+    --background: rgb(255, 255, 255);
+    --color: black;
+    --padding-start: 10px;
+    --padding-end: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 10px; 
+    border: 2px solid #5b0f7c; 
+  }
+
+  ion-button {
+    margin-top: 20px;
+  }
+
+  ion-input {
+    --background: white;
+    --padding-start: 10px; 
+    color: black;
+  }
+  
+  ion-input::part(native) {
+    --background: white;
+    color: black;
+    border-radius: 4px;
+    padding: 10px; 
+    border: 1px solid #ccc; 
+  }
+
+  ion-input::part(native)::placeholder {
+    color: gray; 
+  }
+
+  ion-button {
+    --background: #5b0f7c; 
+    --color: white; 
+    --border-radius: 4px; 
+    --padding: 10px 20px; 
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  }
+  
+}
+
+
+  
+  .signup-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .signup-box {
+    background: white;
+    box-shadow: 1px 4px 6px rgba(1, 0, 0, 0.1); 
+    border-radius: 20px; 
+    width: 300px;
+    padding: 20px;
+    margin-top: 15rem;
+
+  }
+  
+  .signin-link{
+      margin-top: 20px;
+      color: #c0b5b5;
+  }
+
+  .signin-link a {
+    text-decoration: none;
+    color: #5b0f7c;
+  }
+  
+
+h4 {
+    color: #5b0f7c;
+    margin:auto;
+    font-size: 15px;
+}
+
+  .image img {
+    width: 13rem;
+
+  }
+
+  .image {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+  }

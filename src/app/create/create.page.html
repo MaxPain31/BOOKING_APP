@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>CREATE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div class = "book-container">
+    <h1>ADDRESS</h1>
+    <ion-item>
+      <ion-input type="text" placeholder="Title" [(ngModel)]="addresses.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Address" [(ngModel)]="addresses.place"></ion-input>
+    </ion-item>
+    <ion-button color="success" (click)="addAddress()">Save</ion-button>
+  </div>
+</ion-content>

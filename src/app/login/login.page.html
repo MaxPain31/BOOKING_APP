@@ -1,0 +1,25 @@
+<ion-content>
+
+  <div class = "image">
+    <img src="../assets/images/vroomLogo.png">
+  </div>
+
+  <div class="login-container">
+    <div class="login-box">
+      <h4>Login to your account</h4>
+      <ion-item>
+        <ion-input type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="login()">Login</ion-button>
+
+      <div class="signup-link">
+        Don't have an account? <a routerLink="/sign-up">Sign Up</a>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-content>
+
+  <div class = "image">
+    <img src="../assets/images/vroomLogo.png">
+  </div>
+
+  <div class="signup-container signup-box">
+      <h4>Create your account</h4>
+    <ion-item>
+      <ion-label color="medium" position="floating">User Type</ion-label>
+      <ion-select [(ngModel)]="userType">
+        <ion-select-option class="custom-select-option" value="passenger">Passenger</ion-select-option>
+        <ion-select-option class="custom-select-option" value="driver">Driver</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="userType === 'driver'">
+      <ion-label color="medium" position="floating">Car Type</ion-label>
+      <ion-select [(ngModel)]="carType">
+        <ion-select-option class="custom-select-option" value="Motorcycle">Motorcycle</ion-select-option>
+        <ion-select-option class="custom-select-option" value="Sedan">Sedan</ion-select-option>
+        <ion-select-option class="custom-select-option" value="SUV">SUV</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="tel" placeholder="Phone Number" [(ngModel)]="phoneNumber"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" placeholder="Confirm Password" [(ngModel)]="retypePassword"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="signUp()">Sign Up</ion-button>
+
+    <div class="signin-link">
+      Already have an account? <a routerLink="/login">Sign In</a>
+    </div>
+  </div>
+</ion-content>

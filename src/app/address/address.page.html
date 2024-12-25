@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Manage Addresses</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Place</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let address of addressList">
+      <td>{{address.title}}</td>
+      <td>{{address.place}}</td>
+      <td>
+        <div class="btn">
+         <ion-button (click)="update(address)" color="success">Update</ion-button>
+         <ion-button *ngIf="address.id" (click)="delete(address)" color="danger">Delete</ion-button>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  <ion-button expand="block" (click)="add()">Add</ion-button>
+</div>
+</ion-content>

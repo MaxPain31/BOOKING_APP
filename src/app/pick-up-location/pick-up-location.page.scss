@@ -1,0 +1,74 @@
+ion-content {
+  --background: white;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+ion-back-button {
+  --color: white;
+}
+
+ion-title {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1.4rem;
+  --color: white;
+}
+
+ion-toolbar {
+  display: flex;
+  justify-content: center;
+  --background: #5b0f7c;
+  height: 5rem;
+}
+
+ion-button {
+  --background: #5b0f7c;
+  --color: white;
+  --border-radius: 4px;
+  --padding: 10px 20px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 25rem;
+}
+
+ion-searchbar {
+  --border-radius: 20px;
+  --background: #fcf9f9;
+  color: black;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.container h4 {
+  font-size: 15px;
+  color: #000000;
+}
+
+.container {
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.container h4 {
+  text-align: left;
+  font-weight: bold;
+}
+
+h3 {
+  font-weight: bold;
+  margin-bottom: 3px;
+  font-size: 15px;
+}
+
+p {
+  margin: 0;
+  color: #434343;
+  font-size: 10px;
+}
