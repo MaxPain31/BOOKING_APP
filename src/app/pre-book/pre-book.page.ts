@@ -19,18 +19,15 @@ export class PreBookPage implements OnInit {
   selectedDateTime: string = new Date().toISOString().slice(0, 16);
   selectedDriver: string = '';
   selectedDriverEmail: string = '';
-  availableDrivers: { username: string, userEmail: string }[] = [];
+  availableDrivers: { username: string; userEmail: string }[] = [];
   car: Car = new Car();
   carOptions: string[] = ['Motorcycle', 'Sedan', 'SUV'];
   selectedCarType: string = '';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.authService.currentCarType.subscribe(carType => {
+    this.authService.currentCarType.subscribe((carType) => {
       this.selectedCarType = carType[0];
       this.fetchAvailableDrivers();
     });
@@ -45,13 +42,18 @@ export class PreBookPage implements OnInit {
     const db = getFirestore();
     const usersRef = collection(db, 'users');
     console.log(this.selectedCarType);
-    const q = query(usersRef, where('userType', '==', 'driver'), where('available', '==', true), where('carType', '==', this.selectedCarType ));
+    const q = query(
+      usersRef,
+      where('userType', '==', 'driver'),
+      where('available', '==', true),
+      where('carType', '==', this.selectedCarType)
+    );
 
     try {
       const querySnapshot = await getDocs(q);
-      this.availableDrivers = querySnapshot.docs.map(doc => ({
+      this.availableDrivers = querySnapshot.docs.map((doc) => ({
         username: doc.data()['username'],
-        userEmail: doc.data()['email']
+        userEmail: doc.data()['email'],
       }));
     } catch (error) {
       console.error('Error fetching available drivers:', error);
@@ -64,7 +66,9 @@ export class PreBookPage implements OnInit {
       return;
     }
 
-    const selectedDriverData = this.availableDrivers.find(driver => driver.username === this.selectedDriver);
+    const selectedDriverData = this.availableDrivers.find(
+      (driver) => driver.username === this.selectedDriver
+    );
     if (!selectedDriverData) {
       console.error('Selected driver data not found.');
       return;
@@ -75,7 +79,10 @@ export class PreBookPage implements OnInit {
     const selectedDateTimeObj = new Date(this.selectedDateTime);
 
     if (selectedDateTimeObj < currentDateTime) {
-      this.authService.presentAlert('Error', 'Please select a date and time after the current date and time.');
+      this.authService.presentAlert(
+        'Error',
+        'Please select a date and time after the current date and time.'
+      );
       return;
     }
 
@@ -85,10 +92,11 @@ export class PreBookPage implements OnInit {
   private navigateToPickUpLocation() {
     this.router.navigate(['/pick-up-location'], {
       state: {
+        selectedCarType: this.selectedCarType,
         selectedDateTime: this.selectedDateTime,
         selectedDriver: this.selectedDriver,
-        selectedDriverEmail: this.selectedDriverEmail
-      }
+        selectedDriverEmail: this.selectedDriverEmail,
+      },
     });
   }
 
@@ -96,14 +104,13 @@ export class PreBookPage implements OnInit {
     const formData = {
       time: this.selectedDateTime,
       driver: this.selectedDriver,
-      pickupLocation: 'Some Location'
+      pickupLocation: 'Some Location',
     };
-  
+
     if (!formData.time || !formData.driver || !formData.pickupLocation) {
       return false;
     }
-  
+
     return true;
   }
 }
-

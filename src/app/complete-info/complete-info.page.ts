@@ -20,6 +20,7 @@ export class CompleteInfoPage {
   selectedDateTime: string = '';
   selectedDriver: string = '';
   selectedDriverEmail: string = '';
+  selectedCarType: string | null = null;
   pickUpLocation: any;
   dropOffLocation: any;
   username: string = '';
@@ -40,6 +41,7 @@ export class CompleteInfoPage {
     this.selectedDriverEmail = state.selectedDriverEmail;
     this.pickUpLocation = state.pickUpLocation;
     this.dropOffLocation = state.dropOffLocation;
+    this.selectedCarType = state.selectedCarType;
     this.selectedPaymentMethod = state.selectedPaymentMethod;
 
     this.loggedInUserEmail = localStorage.getItem('email') || '';
@@ -108,42 +110,17 @@ export class CompleteInfoPage {
     }
   }
 
-  async confirmBooking() {
-    const db = getFirestore();
-    const bookingsRef = collection(db, 'books');
-    const usersRef = collection(db, 'users');
 
-    console.log(this.selectedDriverEmail);
-
-    try {
-      await addDoc(bookingsRef, {
-        email: this.selectedDriverEmail,
-        username: this.drivername,
-        phNo: this.drivernumber,
-        dropOffLocation: this.dropOffLocation ? this.dropOffLocation : null,
-        pickUpLocation: this.pickUpLocation ? this.pickUpLocation : null,
-        paymentMethod: this.selectedPaymentMethod,
-        'time-date': this.selectedDateTime,
-      });
-      console.log('Booking information saved to Firestore');
-
-      const q = query(usersRef, where('email', '==', this.selectedDriverEmail));
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        const driverDocRef = querySnapshot.docs[0].ref;
-        await updateDoc(driverDocRef, { available: false });
-        console.log('Driver availability updated successfully');
-      } else {
-        console.error(
-          'Driver document not found for email:',
-          this.selectedDriverEmail
-        );
-      }
-    } catch (error) {
-      console.error('Error saving booking information:', error);
-    }
-
-    this.router.navigate(['tabs/activity']);
+  navigateToSelectPayment() {
+    this.router.navigate(['select-payment'], {
+      state: {
+        selectedDateTime: this.selectedDateTime,
+        selectedDriver: this.selectedDriver,
+        selectedDriverEmail: this.selectedDriverEmail,
+        pickUpLocation: this.pickUpLocation,
+        dropOffLocation: this.dropOffLocation,
+        selectedCarType: this.selectedCarType,
+      },
+    });
   }
 }

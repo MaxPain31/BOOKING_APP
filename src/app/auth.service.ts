@@ -27,7 +27,7 @@ import {
   onAuthStateChanged,
   User,
 } from 'firebase/auth';
-
+import { setPersistence, browserLocalPersistence } from 'firebase/auth';
 @Injectable({
   providedIn: 'root',
 })
@@ -49,14 +49,20 @@ export class AuthService {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    onAuthStateChanged(auth, (user) => {
-      this.currentUser = user;
-    });
+    setPersistence(auth, browserLocalPersistence)
+      .then(() => {
+        // Ensure user state is loaded when app starts
+        onAuthStateChanged(auth, (user) => {
+          this.currentUser = user;
+        });
+      })
+      .catch((error) => {
+        console.error('Error setting persistence:', error);
+      });
   }
 
   getUser(): User | null {
-    const auth = getAuth();
-    return auth.currentUser;
+    return this.currentUser;
   }
 
   async getUserType(email: string): Promise<string> {
@@ -176,6 +182,7 @@ export class AuthService {
         console.log('Admin login attempt');
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
+        localStorage.setItem('uid', user.uid);
         this.setAuthentication(true);
         this.presentAlert('Success', 'Admin sign in successful');
         this.router.navigate(['/admin']);
@@ -188,6 +195,7 @@ export class AuthService {
           // Driver account
           localStorage.setItem('email', email);
           localStorage.setItem('password', password);
+          localStorage.setItem('uid', user.uid);
           this.setAuthentication(true);
           this.presentAlert('Success', 'Driver sign in successful');
           this.router.navigate(['/drivers']);
@@ -195,6 +203,7 @@ export class AuthService {
           // Regular user account
           localStorage.setItem('email', email);
           localStorage.setItem('password', password);
+          localStorage.setItem('uid', user.uid);
           this.setAuthentication(true);
           this.presentAlert('Success', 'Sign in successful');
           this.router.navigate(['tabs/dashboard']);

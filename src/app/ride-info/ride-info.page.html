@@ -25,19 +25,17 @@
   </ion-item>
   <ion-item>
     <ion-label>Pick-up Location:</ion-label>
-    <ion-label>{{ pickUpLocation?.address }}</ion-label>
+    <ion-label>{{ pickUpLocation?.place }}</ion-label>
   </ion-item>
   <ion-item>
     <ion-label>Drop-off Location:</ion-label>
-    <ion-label>{{ dropOffLocation?.address }}</ion-label>
+    <ion-label>{{ dropOffLocation?.place }}</ion-label>
   </ion-item>
   <ion-item>
     <ion-label>Selected Car Type:</ion-label>
-    <ion-label>{{ carType.join(', ') }}</ion-label>
+    <ion-label>{{ selectedCarType }}</ion-label>
   </ion-item>
-  
 
-  <ion-button expand="full" (click)="navigateToCompleteInfo()">See Complete Info</ion-button>
+
+  <ion-button expand="full" (click)="navigateToCompleteInfo()">See more info</ion-button>
 </ion-content>
-
-

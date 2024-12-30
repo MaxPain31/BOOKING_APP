@@ -25,6 +25,7 @@ export class PickUpLocationPage implements OnInit {
   savedAddresses: iAddress[] = [];
   loggedInUserEmail: string = '';
   selectedDriverEmail: string = '';
+  selectedCarType: string | null = null;
 
   query: string = '';
   places: any[] = [];
@@ -32,15 +33,19 @@ export class PickUpLocationPage implements OnInit {
   isLoading: boolean = false;
   isDropOffLocation: boolean = true;
 
-
-  constructor(private router: Router, private authService: AuthService,) { }
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     const state = history.state;
-    this.selectedDateTime = state.selectedDateTime;
+    if (state.selectedDateTime == null || state.selectedDateTime == '') {
+      this.setCurrentDateTime();
+    } else {
+      this.selectedDateTime = state.selectedDateTime;
+    }
+    console.log('Selected Date Time:', state);
     this.selectedDriver = state.selectedDriver;
     this.selectedDriverEmail = state.selectedDriverEmail;
-
+    this.selectedCarType = state.selectedCarType;
     this.loggedInUserEmail = localStorage.getItem('email') || '';
 
     this.fetchRecentBooks();
@@ -50,16 +55,22 @@ export class PickUpLocationPage implements OnInit {
     this.places = [];
   }
 
-  
+  setCurrentDateTime() {
+    const currentDate = new Date();
+    this.selectedDateTime = currentDate.toISOString().slice(0, 19);
+  }
 
   async fetchRecentBooks() {
     const db = getFirestore();
     const booksRef = collection(db, 'completed-books');
-    const q = query(booksRef, where('user-email', '==', this.loggedInUserEmail));
+    const q = query(
+      booksRef,
+      where('user-email', '==', this.loggedInUserEmail)
+    );
 
     try {
       const querySnapshot = await getDocs(q);
-      this.recentBooks = querySnapshot.docs.map(doc => doc.data()['address']);
+      this.recentBooks = querySnapshot.docs.map((doc) => doc.data()['address']);
     } catch (error) {
       console.error('Error fetching recent books:', error);
     }
@@ -69,7 +80,7 @@ export class PickUpLocationPage implements OnInit {
     const db = getFirestore();
     const addressesRef = collection(db, 'saved-addresses');
     const q = query(addressesRef, where('email', '==', this.loggedInUserEmail));
-  
+
     try {
       const querySnapshot = await getDocs(q);
       this.savedAddresses = [];
@@ -78,7 +89,7 @@ export class PickUpLocationPage implements OnInit {
         const address: iAddress = {
           id: doc.id,
           title: addressData.title,
-          place: addressData.address
+          place: addressData.address,
         };
         this.savedAddresses.push(address);
       });
@@ -87,26 +98,33 @@ export class PickUpLocationPage implements OnInit {
     }
   }
 
-  selectAddress(address: { title: string, address: string }) {
+  selectAddress(address: { title: string; address: string }) {
     const isBookmarked = this.isBookmarked(address);
     this.saveAddress(address, true);
   }
 
-  isBookmarked(place: { title: string, address: string }): boolean {
-    return this.savedAddresses.some(savedAddress => savedAddress.place === place.address);
-  }  
-  
-  async saveAddress(place: { title: string, address: string }, toggle: boolean) {
+  isBookmarked(place: { title: string; address: string }): boolean {
+    return this.savedAddresses.some(
+      (savedAddress) => savedAddress.place === place.address
+    );
+  }
+
+  async saveAddress(
+    place: { title: string; address: string },
+    toggle: boolean
+  ) {
     try {
       const db = getFirestore();
       const addressesRef = collection(db, 'saved-addresses');
-      const querySnapshot = await getDocs(query(addressesRef, where('place.address', '==', place.address)));
-  
+      const querySnapshot = await getDocs(
+        query(addressesRef, where('place.address', '==', place.address))
+      );
+
       if (toggle) {
         if (querySnapshot.empty) {
           await addDoc(addressesRef, {
             place,
-            email: this.loggedInUserEmail
+            email: this.loggedInUserEmail,
           });
           this.authService.presentToast('Address saved successfully');
         } else {
@@ -116,7 +134,6 @@ export class PickUpLocationPage implements OnInit {
           });
         }
       }
-
     } catch (error) {
       console.error('Error saving or removing address:', error);
     }
@@ -124,18 +141,22 @@ export class PickUpLocationPage implements OnInit {
 
   confirm() {
     if (!this.query) {
-      this.authService.presentAlert('Error', 'Please select a pick-up location.');
+      this.authService.presentAlert(
+        'Error',
+        'Please select a pick-up location.'
+      );
       return;
     }
 
     this.router.navigate(['/drop-off-location'], {
       state: {
+        selectedCarType: this.selectedCarType,
         selectedDateTime: this.selectedDateTime,
         selectedDriver: this.selectedDriver,
         pickUpLocation: this.addressList,
         dropOffLocation: this.dropOffLocation,
-        selectedDriverEmail: this.selectedDriverEmail
-      }
+        selectedDriverEmail: this.selectedDriverEmail,
+      },
     });
   }
 
@@ -144,22 +165,25 @@ export class PickUpLocationPage implements OnInit {
       this.places = [];
       return;
     }
-  
+
     if (!this.places || this.places.length == 0) {
       await this.fetchAddresses();
-      console.log(this.query)
-      console.log(this.places)
+      console.log(this.query);
+      console.log(this.places);
     }
-  
+
     try {
-      const autoCompleteItems = this.addressList.filter(address =>
-        address.place.toLowerCase().includes(this.query.toLowerCase()) ||
-        address.title.toLowerCase().includes(this.query.toLowerCase())
-      ).map(address => ({
-        title: address.title,
-        address: address.place
-      }));
-  
+      const autoCompleteItems = this.addressList
+        .filter(
+          (address) =>
+            address.place.toLowerCase().includes(this.query.toLowerCase()) ||
+            address.title.toLowerCase().includes(this.query.toLowerCase())
+        )
+        .map((address) => ({
+          title: address.title,
+          address: address.place,
+        }));
+
       this.places = autoCompleteItems;
       console.log(this.places);
     } catch (error) {
@@ -178,7 +202,7 @@ export class PickUpLocationPage implements OnInit {
         const address: iAddress = {
           id: doc.id,
           title: addressData['title'],
-          place: addressData['place']
+          place: addressData['place'],
         };
         this.addressList.push(address);
       });
@@ -194,5 +218,12 @@ export class PickUpLocationPage implements OnInit {
     this.query = place.address;
     this.places = [];
     console.log(this.query);
+  }
+
+  setSearchBar(place: any) {
+    this.addressList = place;
+    this.query = place.place;
+    this.places = [];
+    console.log('Search bar updated with:', place);
   }
 }

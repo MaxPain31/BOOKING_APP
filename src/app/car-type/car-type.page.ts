@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Car } from './car-type.model';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { LoadingController } from '@ionic/angular';
-import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from 'firebase/firestore';
 
 @Component({
   selector: 'app-car-type',
@@ -12,19 +15,18 @@ import { collection, getDocs, getFirestore, query, where } from 'firebase/firest
   styleUrls: ['./car-type.page.scss'],
 })
 export class CarTypePage implements OnInit {
-  car: Car = new Car();
   carType: string[] = ['Motorcycle', 'Sedan', 'SUV'];
-  availableDrivers: { username: string, userEmail: string }[] = [];
+  selectedDateTime: string = '';
+  selectedCarType: string | null = null;
+  availableDrivers: { username: string; userEmail: string }[] = [];
 
   constructor(
     private router: Router,
-    private alertController: AlertController,
-    private authService: AuthService,
-    private loadController: LoadingController
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
-    console.log(this.car.type);
+    console.log(`Initial car type: ${this.selectedCarType}`);
   }
 
   async fetchAvailableDrivers() {
@@ -34,14 +36,14 @@ export class CarTypePage implements OnInit {
       usersRef,
       where('userType', '==', 'driver'),
       where('available', '==', true),
-      where('carType', '==', this.car.type)
+      where('carType', '==', this.selectedCarType)
     );
 
     try {
       const querySnapshot = await getDocs(q);
-      this.availableDrivers = querySnapshot.docs.map(doc => ({
+      this.availableDrivers = querySnapshot.docs.map((doc) => ({
         username: doc.data()['username'],
-        userEmail: doc.data()['email']
+        userEmail: doc.data()['email'],
       }));
     } catch (error) {
       console.error('Error fetching available drivers:', error);
@@ -49,12 +51,13 @@ export class CarTypePage implements OnInit {
   }
 
   async confirm() {
-    if (!this.car.type) {
+    if (!this.selectedCarType) {
       const alert = await this.alertController.create({
         header: 'Error',
         message: 'Please select a car type',
-        buttons: ['OK']
+        buttons: ['OK'],
       });
+
       await alert.present();
       return;
     }
@@ -65,23 +68,27 @@ export class CarTypePage implements OnInit {
       const alert = await this.alertController.create({
         header: 'Error',
         message: 'No available drivers for the selected car type',
-        buttons: ['OK']
+        buttons: ['OK'],
       });
       await alert.present();
       return;
     }
 
-    const selectedDriver = this.availableDrivers[Math.floor(Math.random() * this.availableDrivers.length)];
+    const selectedDriver =
+      this.availableDrivers[
+        Math.floor(Math.random() * this.availableDrivers.length)
+      ];
 
-    console.log(this.car.type);
+    console.log(this.selectedCarType);
     console.log(selectedDriver);
 
     this.router.navigate(['/pick-up-location'], {
       state: {
-        selectedCarType: this.car.type,
+        selectedDateTime: this.selectedDateTime,
+        selectedCarType: this.selectedCarType,
         selectedDriver: selectedDriver.username,
-        selectedDriverEmail: selectedDriver.userEmail
-      }
+        selectedDriverEmail: selectedDriver.userEmail,
+      },
     });
   }
 }

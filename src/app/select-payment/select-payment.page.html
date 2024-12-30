@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="ride-info"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Payment Method</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-radio-group [(ngModel)]="selectedPaymentMethod">
+      <ion-list-header>
+        <ion-label>Select Payment Method</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>GCash</ion-label>
+        <ion-radio slot="start" value="GCash"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>COD</ion-label>
+        <ion-radio slot="start" value="COD"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <div *ngIf="selectedPaymentMethod === 'GCash'">
+    <ion-item>
+      <ion-label position="floating">Account Name</ion-label>
+      <ion-input [(ngModel)]="accountName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Account Phone Number</ion-label>
+      <ion-input [(ngModel)]="accountPhoneNumber"></ion-input>
+    </ion-item>
+  </div>
+  <ion-button expand="block" (click)="confirmBooking()">Confirm to Pay</ion-button>
+
+</ion-content>

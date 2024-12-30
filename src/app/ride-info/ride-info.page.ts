@@ -24,10 +24,10 @@ export class RideInfoPage implements OnInit {
   pickUpLocation: any;
   dropOffLocation: any;
   addressList: iAddress[] = [];
-  carType: string[] = [];
+  selectedCarType: any;
   isLoading: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     const state = history.state;
@@ -36,8 +36,9 @@ export class RideInfoPage implements OnInit {
     this.selectedDriverEmail = state.selectedDriverEmail;
     this.pickUpLocation = state.pickUpLocation;
     this.dropOffLocation = state.dropOffLocation;
-    this.authService.currentCarType.subscribe(type => this.carType = type);
-    
+    this.selectedCarType = state.selectedCarType; // Default if not provided
+    console.log('State:', history.state);
+    console.log('Selected Car Type:', this.selectedCarType);
   }
 
   navigateToCompleteInfo() {
@@ -47,8 +48,9 @@ export class RideInfoPage implements OnInit {
         selectedDriver: this.selectedDriver,
         selectedDriverEmail: this.selectedDriverEmail,
         pickUpLocation: this.pickUpLocation,
-        dropOffLocation: this.dropOffLocation
-      }
+        dropOffLocation: this.dropOffLocation,
+        selectedCarType: this.selectedCarType,
+      },
     });
   }
 
@@ -63,7 +65,7 @@ export class RideInfoPage implements OnInit {
         const address: iAddress = {
           id: doc.id,
           title: addressData['title'],
-          place: addressData['place']
+          place: addressData['place'],
         };
         this.addressList.push(address);
       });

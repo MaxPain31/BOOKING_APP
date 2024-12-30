@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, query, where, getDocs, updateDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+} from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -30,7 +37,10 @@ export class UserAccountPage implements OnInit {
     const emailFromLocalStorage = localStorage.getItem('email');
 
     if (emailFromLocalStorage) {
-      const q = query(collection(db, 'users'), where('email', '==', emailFromLocalStorage));
+      const q = query(
+        collection(db, 'users'),
+        where('email', '==', emailFromLocalStorage)
+      );
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
@@ -65,7 +75,10 @@ export class UserAccountPage implements OnInit {
   }
 
   signOut() {
-    this.router.navigate(['login']);
+    this.router.navigate(['login']).then(() => {
+      window.location.reload();
+    });
     this.authService.setAuthentication(false);
+    localStorage.clear();
   }
 }

@@ -6,25 +6,22 @@
     <ion-title>Select your Pick-Up Location</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar 
-      animated="true" 
-      debounce="800" 
-      placeholder="Search your Pick-Up Location" 
-      (ionInput)="searchAddress()"
-      [(ngModel)]="query">
+    <ion-searchbar animated="true" debounce="800" placeholder="Search your Pick-Up Location"
+      (ionInput)="searchAddress()" [(ngModel)]="query">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list *ngIf="places.length > 0"> 
+  <ion-list *ngIf="places.length > 0">
     <ion-item *ngFor="let place of places" tappable (click)="choosePlace(place)">
       <ion-icon name="location-outline" slot="start"></ion-icon>
       <ion-label>
-        <h2>{{ place.title }}</h2> 
+        <h2>{{ place.title }}</h2>
         <p>{{ place.address }}</p>
       </ion-label>
-      <ion-icon name="{{ isBookmarked(place) ? 'bookmark' : 'bookmark-outline' }}" (click)="selectAddress(place)"></ion-icon>
+      <ion-icon name="{{ isBookmarked(place) ? 'bookmark' : 'bookmark-outline' }}"
+        (click)="selectAddress(place)"></ion-icon>
     </ion-item>
   </ion-list>
   <ion-header collapse="condense">
@@ -33,20 +30,14 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class = "container">
-    <h4>Recent Complete Books</h4>
-      <ion-item *ngFor="let book of recentBooks">
-      {{ book }}
-    </ion-item>
-  </div>
-
   <div class="container">
     <h4>Saved Addresses</h4>
-    <div *ngFor="let address of savedAddresses">
+    <div *ngFor="let address of savedAddresses" class="clickable" (click)="setSearchBar(address)">
       <h3>{{ address.title }}</h3>
       <p>{{ address.place }}</p>
     </div>
   </div>
+
 
 
   <ion-button expand="block" (click)="confirm()">Proceed</ion-button>
